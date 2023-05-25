@@ -6,7 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductInventoryController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\ProfileController;
-use App\Models\ProductType;
+use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +71,13 @@ Route::get('inventory/download/pdf/{inventory_download_id}', [ProductInventoryCo
 Route::get('inventory/delete/list', [ProductInventoryController::class, 'inventory_delete_list'])->name('inventory.delete.list');
 Route::get('inventory/restore/{restore_id}', [ProductInventoryController::class, 'inventory_restore'])->name('inventory.restore');
 Route::get('inventory/permanent/delete/{permanent_delete_id}', [ProductInventoryController::class,'inventory_permanent_delete'])->name('inventory.permanent.delete');
+
+
+
+//product sale start
+Route::get('sale/form', [SaleController::class, 'create'])->name('sale.form');
+Route::post('/get/product/details', [SaleController::class, 'get_product_details'])->name('get.product.details');
+//product sale end
 //backend product  end
 
 
