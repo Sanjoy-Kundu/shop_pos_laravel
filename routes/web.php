@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\PdfmakingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductInventoryController;
 use App\Http\Controllers\ProductTypeController;
@@ -67,7 +68,7 @@ Route::post('product/update/{update_id}',[ProductController::class, 'update'])->
 Route::get('inventory/list', [ProductInventoryController::class, 'index'])->name('inventory.list');
 Route::get('inventory/report/pdf/{inventory_pdf_id}', [ProductInventoryController::class, 'inventory_report_pdf'])->name('inventory.report.pdf');
 Route::get('inventory/report/delete/{inventory_report_id}', [ProductInventoryController::class, 'inventory_report_delete'])->name('inventory.report.delete');
-Route::get('inventory/download/pdf/{inventory_download_id}', [ProductInventoryController::class, 'product_download'])->name('inventory.download.pdf');
+// Route::get('inventory/download/pdf/{inventory_download_id}', [ProductInventoryController::class, 'product_download'])->name('inventory.download.pdf');
 Route::get('inventory/delete/list', [ProductInventoryController::class, 'inventory_delete_list'])->name('inventory.delete.list');
 Route::get('inventory/restore/{restore_id}', [ProductInventoryController::class, 'inventory_restore'])->name('inventory.restore');
 Route::get('inventory/permanent/delete/{permanent_delete_id}', [ProductInventoryController::class,'inventory_permanent_delete'])->name('inventory.permanent.delete');
@@ -78,6 +79,15 @@ Route::get('inventory/permanent/delete/{permanent_delete_id}', [ProductInventory
 Route::get('sale/form', [SaleController::class, 'create'])->name('sale.form');
 Route::post('/get/product/details', [SaleController::class, 'get_product_details'])->name('get.product.details');
 //product sale end
+
+
+
+//Pdf part start
+Route::get('inventory/pdf/{inventory_id}', [PdfmakingController::class, 'Inventory_pdf'])->name('inventory.pdf');
+//Pdf part end
+
+
+
 //backend product  end
 
 

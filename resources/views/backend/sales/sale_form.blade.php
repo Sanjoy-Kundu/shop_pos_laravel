@@ -7,14 +7,14 @@
         <li class="breadcrumb-item">
           <a href="index.html">Home</a>
         </li>
-        <li class="breadcrumb-item active">Add Product</li>
+        <li class="breadcrumb-item active">Sell Your  Product</li>
       </ol>
       <!-- Page Content -->
       <!-- DataTables Example -->
       <div class="card mb-3">
         <div class="card-header bg-primary text-white">
           <i class="fa fa-table"></i>
-      Add Product <small><sup><b style="font-size: 20px"></b></sup></small>
+      Sell Your Product <small><sup><b style="font-size: 20px"></b></sup></small>
           <a href="{{route('product.list')}}" class="text-white">
             <span class="float-right">
               <i class="fa fa-plus"></i>
@@ -28,6 +28,10 @@
           @if (session('success'))
               <div class="alert alert-success">{{session('success')}}</div>
           @endif
+
+            {{-- <div class="product_details">
+                <p id="avail_product">My product</p>
+            </div> --}}
 
           <form class="" method="post" action="">
               @csrf
@@ -49,8 +53,9 @@
                 <div class="form-group">
 
                   <label>Product Brand</label>
-                  <select class="form-control text-primary" name="product_brand_id">
+                  <select class="form-control text-primary" name="product_brand_id" id="brand_dropdown">
                     <option disabled selected><sub>Please select a product brand</sub></option>
+
                     {{-- @forelse ($brands as $brand)
                     <option value=" {{$brand->id}}">{{$brand->brand_name}}</option>
                     @empty
@@ -76,11 +81,24 @@
                   <small class="float-right">Product vendor not listed here? <a href="#"data-toggle="modal" data-target="#addProductVendorModal">Add new</a> </small>
                 </div> --}}
                 <div class="form-group">
-                  <label for="">Product Name</label>
+                    <label>Product Name</label>
+                    <select class="form-control text-primary" name="product_name" id="product_name_dropdown">
+                      <option disabled selected><sub>Please select a product name</sub></option>
+
+                      {{-- @forelse ($brands as $brand)
+                      <option value=" {{$brand->id}}">{{$brand->brand_name}}</option>
+                      @empty
+                      <option>Please Upload Your Brand First</option>
+                      @endforelse --}}
+                    </select>
+                    @error('product_name')
+                    <b class="text-danger">{{$message}}</b>
+                @enderror
+                  {{-- <label for="">Product Name</label>
                   <input type="text" class="form-control" name="product_name" value="" placeholder="Enter product name...">
                   @error('product_name')
                   <b class="text-danger">{{$message}}</b>
-              @enderror
+              @enderror --}}
                 </div>
                 <div class="form-group">
                   <label for="">Product Price <small class="text-muted">(cost/item)</small> </label>
@@ -202,6 +220,7 @@
 //         alert('ghello');
 //     });
 //  });
+
 $(document).ready(function(){
     $('#product_type').change(function(){
        // alert("hello Bangladesh");
@@ -221,12 +240,19 @@ $(document).ready(function(){
                     url: '/get/product/details',
                     data:{productTypeIdName : productTypeId},
                     success: function(data){
-                        alert(data);
+                       //alert(data);
+                        $('#brand_dropdown').html(data);
                     }
                 })
  //  ================== ajax end=========
     });
 });
+
+
+
+//product brand
+
+
 </script>
 </body>
 </html>

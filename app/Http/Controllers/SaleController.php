@@ -70,6 +70,7 @@ class SaleController extends Controller
 
 
     public function get_product_details(Request $request){
+        $generated_option = " "; //new class
              // return $request->productTypeIdName;
      //return Brand::all();
        $products =  Product::where([
@@ -77,9 +78,18 @@ class SaleController extends Controller
         ])->get();
 
         foreach($products as $product){
-            echo $product->relationToBrand->brand_name;
+
+
+            //echo $product->relationToBrand->brand_name;
+            // $generated_option .= "<option value='..'>.$product->relationToBrand->brand_name.</option>";
+            $generated_option .= "<option value='".$product->relationToBrand->id."'>".$product->relationToBrand->brand_name."</option>";
+            //$generated_option = "<option value='".$product->id."'>".$product->product_name."</option>";
         }
+        return $generated_option;
 
 
     }
+
+
+
 }

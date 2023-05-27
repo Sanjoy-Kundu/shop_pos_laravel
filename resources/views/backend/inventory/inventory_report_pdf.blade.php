@@ -64,8 +64,10 @@
             <th>Action</th>
             <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-info"><a href="{{url('inventory/download/pdf')}}/{{$all_products->id}}" class="text-white" style="text-decoration:none">Download PDF</a></button>
-                        <button type="button" class="btn btn-warning"><a href="" class="text-white" style="text-decoration:none">PRINT</a></button>
+                        <button type="button" class="btn btn-info">
+                            <a href="{{route('inventory.pdf', $all_products->id)}}" class="text-white" style="text-decoration:none">Download PDF</a>
+                        </button>
+                        <button type="button" class="btn btn-warning" id="print_inventory"><a href="" class="text-white" style="text-decoration:none">PRINT</a></button>
                       </div>
             </td>
           </tr>
@@ -95,3 +97,9 @@
         </tbody>
       </table>
   </div>
+<script>
+    //let print_button = document.getElementById("print_inventory");
+    document.getElementById('print_inventory').addEventListener('click', function(){
+        window.print();
+    })
+</script>
