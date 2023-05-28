@@ -67,29 +67,16 @@
               @enderror
 
                 </div>
-                {{-- <div class="form-group">
-                  <label>Product Vendor</label>
-                  <select class="form-control text-primary" required>
-                    <option disabled selected><sub>Please select a product vendor</sub></option>
-                    <option>Haider Abbas</option>
-                    <option>Muhammad Faisal</option>
-                    <option>Nouman Aslam</option>
-                    <option>Anees Ahmad Khan</option>
-                    <option>Waleed Ahmad</option>
-                    <option>Abdul Wahid</option>
-                  </select>
-                  <small class="float-right">Product vendor not listed here? <a href="#"data-toggle="modal" data-target="#addProductVendorModal">Add new</a> </small>
-                </div> --}}
                 <div class="form-group">
+                    <p id="Product_name">HOI</p>
                     <label>Product Name</label>
-                    <select class="form-control text-primary" name="product_name" id="product_name_dropdown">
+                    <select class="form-control text-primary" name="product_name" id="product_name">
                       <option disabled selected><sub>Please select a product name</sub></option>
-
-                      {{-- @forelse ($brands as $brand)
-                      <option value=" {{$brand->id}}">{{$brand->brand_name}}</option>
-                      @empty
-                      <option>Please Upload Your Brand First</option>
-                      @endforelse --}}
+                        @forelse ($products as $product)
+                        <option value=" {{$product->id}}">{{$product->product_name}}</option>
+                        @empty
+                        <option>Please Upload Your Product First</option>
+                        @endforelse
                     </select>
                     @error('product_name')
                     <b class="text-danger">{{$message}}</b>
@@ -100,33 +87,38 @@
                   <b class="text-danger">{{$message}}</b>
               @enderror --}}
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                   <label for="">Product Price <small class="text-muted">(cost/item)</small> </label>
-                  <input type="number" class="form-control" name="product_price" value="" placeholder="Enter cost of product per item...">
+                  <input type="number" class="form-control" name="product_price" value="" id="product_price">
                   @error('product_price')
                   <b class="text-danger">{{$message}}</b>
               @enderror
-                </div>
+                </div> --}}
                 <div class="form-group">
+                  <label for="">Product Price <small class="text-muted">(cost/item)</small> </label>
+                  <select class="form-control text-primary" name="product_price" id="product_price">
+                    <option disabled selected><sub>Please select a product name</sub></option>
+                  </select>
+                </div>
+
+
+
+
+                {{-- <div class="form-group">
                   <label for="">Product Stock/Quantity <small>(How many products are you adding in stock?)</small> </label>
                   <input type="number" class="form-control" name="product_quantity" value="" placeholder="Enter number of items...">
                   @error('product_quantity')
                   <b class="text-danger">{{$message}}</b>
               @enderror
+                </div> --}}
+
+                <div class="form-group">
+                  <label for="">Product Stock/Quantity <small>(How many products are you adding in stock?)</small> </label>
+                  <select class="form-control text-primary" name="product_price" id="product_quantity">
+                    <option disabled selected><sub>Please select a product name</sub></option>
+                  </select>
                 </div>
-                {{-- How are you paying for this product?
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                    Store Account
-                  </label>
-                </div> --}}
-                {{-- <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                    Other. I don't want to record this epxense.
-                  </label>
-                </div> --}}
+
                 <br>
                 <div class="form-group">
                   <label for="">Description <small class="text-muted">(Optional)</small></label>
@@ -247,12 +239,51 @@ $(document).ready(function(){
  //  ================== ajax end=========
     });
 });
-
-
-
-//product brand
-
-
 </script>
+
+
+
+
+<script>
+    //  $(document).ready(function(){
+    //     $('#product_type').click(function(){
+    //         alert('ghello');
+    //     });
+    //  });
+
+    $(document).ready(function(){
+        $('#product_name').change(function(){
+           // alert("hello Bangladesh");
+            var productNameId = $(this).val();
+
+           // alert(productTypeId);
+     // =============ajax start=============
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        //type: 'get', first
+                        type: 'post',
+                        url: '/get/product/name',
+                        data:{productIdName : productNameId},
+                        success: function(data){
+                           //alert(data);
+                           $("#product_price").html(data);
+                           $('#product_quantity').html(data);
+                           // $('#brand_dropdown').html(data);
+                        }
+                    })
+     //  ================== ajax end=========
+        });
+    });
+    </script>
+
+
+
+
+
 </body>
 </html>

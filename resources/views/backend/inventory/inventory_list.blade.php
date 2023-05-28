@@ -51,6 +51,7 @@
                     <td>{{$product->created_at->format('d-M-Y')}}</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-warning"><a href="{{url('inventory/sell')}}/{{$product->id}}"class="text-white" style="text-decoration:none">Total Sells</a></button>
                             <button type="button" class="btn btn-primary"><a href="{{url('inventory/report/pdf')}}/{{$product->id}}"class="text-white" style="text-decoration:none">Details</a></button>
                             <button type="button" class="btn btn-danger"><a href="{{url('inventory/report/delete')}}/{{$product->id}}" class="text-white" style="text-decoration:none" id="">Delete</a></button>
 

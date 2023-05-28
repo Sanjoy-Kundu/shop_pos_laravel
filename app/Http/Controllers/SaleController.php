@@ -25,7 +25,8 @@ class SaleController extends Controller
     {
         $productTypes = ProductType::all();
         $brands = Brand::all();
-        return view('backend.sales.sale_form', compact('productTypes', 'brands'));
+        $products = Product::all();
+        return view('backend.sales.sale_form', compact('productTypes', 'brands', 'products'));
     }
 
     /**
@@ -86,9 +87,32 @@ class SaleController extends Controller
             //$generated_option = "<option value='".$product->id."'>".$product->product_name."</option>";
         }
         return $generated_option;
-
-
     }
+
+
+    //product name
+    public function get_product_name(Request $request){
+        $generated_option = " "; //new class
+           // return $request->productIdName;
+
+     //return Brand::all();
+       $products =  Product::where([
+            'id' => $request->productIdName,
+        ])->get();
+
+        foreach($products as $product){
+
+            //echo $product->product_name;
+            //echo $product->product_price;
+            $generated_option =   "<option value='".$product->id."'>".$product->product_price."</option>";
+          //  $quantity_option =   "<option value='".$product->id."'>".$product->product_quantity."</option>";
+            //              $generated_option =   "<input type='number' class='form-control' name='product_price' value='$product->price' id='product_price'>";
+        }
+        return $generated_option;
+    }
+
+
+
 
 
 

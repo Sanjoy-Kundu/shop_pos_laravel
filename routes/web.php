@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\PagePrintController;
 use App\Http\Controllers\PdfmakingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductInventoryController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\StockInventroyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,11 +75,30 @@ Route::get('inventory/delete/list', [ProductInventoryController::class, 'invento
 Route::get('inventory/restore/{restore_id}', [ProductInventoryController::class, 'inventory_restore'])->name('inventory.restore');
 Route::get('inventory/permanent/delete/{permanent_delete_id}', [ProductInventoryController::class,'inventory_permanent_delete'])->name('inventory.permanent.delete');
 
+//product inventory end
+
+
+//inventory stock start
+
+Route::get('inventory/sell/{id}', [StockInventroyController::class, 'create'])->name('inventory.sell');
+Route::post('inventory/store', [StockInventroyController::class, 'store'])->name('inventory.store');
+//inventory stock end
+
+
+
+
+
+
+
 
 
 //product sale start
 Route::get('sale/form', [SaleController::class, 'create'])->name('sale.form');
 Route::post('/get/product/details', [SaleController::class, 'get_product_details'])->name('get.product.details');
+Route::post('/get/product/name', [SaleController::class, 'get_product_name'])->name('get.product.name');
+//::::::ajax::::::
+
+//Route::post('/get/product/info', [SaleController::class, 'product_info'])->name('get.product.info');
 //product sale end
 
 
@@ -86,6 +107,11 @@ Route::post('/get/product/details', [SaleController::class, 'get_product_details
 Route::get('inventory/pdf/{inventory_id}', [PdfmakingController::class, 'Inventory_pdf'])->name('inventory.pdf');
 //Pdf part end
 
+
+
+//print page start
+Route::get('inventory/print/{inventory_id}', [PagePrintController::class, 'inventory_print'])->name('inventory.print');
+//print page end
 
 
 //backend product  end

@@ -49,7 +49,8 @@ public function product_download($inventory_id){
      */
     public function create()
     {
-        //
+
+
     }
 
     /**
@@ -57,7 +58,7 @@ public function product_download($inventory_id){
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

@@ -1,5 +1,14 @@
 
-@include('layouts.backendmaster')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PDF DOWNLOAD</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body>
 <div class="container">
     <div class="invoice">
       <div class="row">
@@ -22,55 +31,55 @@
           <p>
             <strong>Product Invoice</strong><br>
            Today Date: <em>{{date('d-M-Y')}}</em><br>
-            Time: {{date('g:i a')}}<br>
-            Invoices: <b>{{$all_products->product_invoice}}</b>
+           Downloading Time: {{date('g:i a')}}<br>
+            Invoices: <b>{{$products->product_invoice}}</b>
           </p>
         </div>
       </div>
       <br>
       <br>
-      <h6>Product Creation Date: <b> ({{$all_products->created_at->format('d-M-Y')}})</b></h6>
+      <h6>Product Creation Date: <b> ({{$products->created_at->format('d-M-Y')}})</b></h6>
       <br>
       <table class="table table-striped border-1">
         <tr>
           <th>Product Uploaded Date & Time</th>
-          <td>{{$all_products->created_at->format('d-M-Y')}}</td>
+          <td>{{$products->created_at->format('d-M-Y')}}</td>
         </tr>
           <tr>
             <th>Product Name</th>
-            <td>{{$all_products->product_name}}</td>
+            <td>{{$products->product_name}}</td>
           </tr>
           <tr>
             <th>Product Brand</th>
-            <td>{{$all_products->relationToBrand->brand_name}}</td>
+            <td>{{$products->relationToBrand->brand_name}}</td>
           </tr>
           <tr>
             <th>Product Type</th>
-            <td>{{$all_products->relationToProductType->product_type}}</td>
+            <td>{{$products->relationToProductType->product_type}}</td>
           </tr>
           <tr>
             <th>Product Quantity</th>
-            <td>{{$all_products->product_quantity}}</td>
+            <td>{{$products->product_quantity}}</td>
           </tr>
           <tr>
             <th>Prouct per Price</th>
-            <td>{{$all_products->product_price}}BDT.</td>
+            <td>{{$products->product_price}}BDT.</td>
           </tr>
           <tr>
             <th>Total Amount</th>
-            <td class="ms-4">{{$all_products->product_quantity * $all_products->product_price}}BDT.</td>
+            <td class="ms-4">{{$products->product_quantity * $products->product_price}}BDT.</td>
           </tr>
-          <tr>
+          {{-- <tr>
             <th>Action</th>
             <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-info">
-                            <a href="{{route('inventory.pdf', $all_products->id)}}" class="text-white" style="text-decoration:none">Download PDF</a>
+                            <a href="{{route('inventory.pdf', $products->id)}}" class="text-white" style="text-decoration:none">Download PDF</a>
                         </button>
-                        <button type="button" class="btn btn-warning" id="print_inventory" target="_blank"><a href="" class="text-white" style="text-decoration:none">PRINT</a></button>
+                        <button type="button" class="btn btn-warning"><a href="" class="text-white" style="text-decoration:none">PRINT</a></button>
                       </div>
             </td>
-          </tr>
+          </tr> --}}
           {{-- <tr>
             <th>Product Name</th>
             <th>Product Brand</th>
@@ -82,24 +91,29 @@
 
 
           {{-- <tr>
-            <td>{{$all_products->product_name}}</td>
+            <td>{{$products->product_name}}</td>
             <td>{{$productBrand->brand_name}}</td>
             <td>{{$productType->product_type}}</td>
-            <td>{{$all_products->product_quantity}}</td>
-            <td>{{$all_products->product_price}}(BDT.)</td>
-            <td class="text-right">{{$all_products->product_quantity * $all_products->product_price}}(BDT.)</td>
+            <td>{{$products->product_quantity}}</td>
+            <td>{{$products->product_price}}(BDT.)</td>
+            <td class="text-right">{{$products->product_quantity * $products->product_price}}(BDT.)</td>
           </tr>
 
           <tr>
             <td colspan="5">Toatal Amont</td>
-            <td class="ms-4">{{$all_products->product_quantity * $all_products->product_price}}</td>
+            <td class="ms-4">{{$products->product_quantity * $products->product_price}}</td>
           </tr> --}}
         </tbody>
       </table>
   </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 <script>
-    let print_button = document.getElementById("print_inventory");
+        //let print_button = document.getElementById("print_inventory");
     document.getElementById('print_inventory').addEventListener('click', function(){
         window.print();
     })
 </script>
+</body>
+</html>
